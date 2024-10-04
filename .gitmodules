@@ -1,0 +1,4 @@
+[submodule "Contracts"]
+	path = AmigoPago-Contracts
+	url = https://github.com/AmigoPago/AmigoPago-Contracts.git
+	branch = main
