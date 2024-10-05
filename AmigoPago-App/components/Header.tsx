@@ -33,8 +33,8 @@ export default function HeaderComponent() {
   // };
 
   return (
-    <header className="w-full flex justify-between items-center :mx-8 mb-4 p-2 md:px-4 md:py-6 border border-gray-400 shadow-md rounded-lg bg-gradient-to-b from-[#f5f6f7] via-[#f5f6f7] to-[#c1c6d0]">
-          <Link href="/" className="ml-8">
+    <header className="w-full flex justify-between items-center :mx-8 mb-4 py-2 md:px-4 md:py-6 border border-gray-400 shadow-md rounded-lg bg-gradient-to-b from-[#f5f6f7] via-[#f5f6f7] to-[#c1c6d0]">
+          <Link href="/" className="ml-4 md:ml-8">
             <h1 className="text-gray-800 text-2xl md:text-4xl font-bold">Amigo Pago</h1>            
           </Link> 
           { false && (
@@ -42,17 +42,17 @@ export default function HeaderComponent() {
             <Link className="text-gray-300 hover:text-white text-xl mx-4" href="/">
               Home
             </Link>
-            <Link className="text-gray-300 hover:text-white text-xl mx-4" href="/saving">
-              Savings
+            <Link className="text-gray-300 hover:text-white text-xl mx-4" href="/page1">
+              Page 1
             </Link>
-            <Link className="text-gray-300 hover:text-white text-xl mx-4" href="/payments">
-              Payments
+            <Link className="text-gray-300 hover:text-white text-xl mx-4" href="/page2">
+              Page 2
             </Link>
           </nav>          
           )}
 
           { true && (
-            <Button className="mr-8  mt-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
+            <Button className="mr-2 md:mr-8  md:mt-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
               Login
             </Button>
           )}
