@@ -12,7 +12,13 @@ const nextConfig = {
           // your project has type errors.
           // !! WARN !!
           ignoreBuildErrors: true,
-        },    
+        },
+    transpilePackages: [
+      'passkey-kit',
+      'passkey-factory-sdk',
+      'passkey-kit-sdk',
+      'sac-sdk',
+    ]
   };
 
 export default nextConfig;

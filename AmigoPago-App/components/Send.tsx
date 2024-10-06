@@ -4,12 +4,59 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import app from '../config/firebaseConfig';
+import { getAuth } from 'firebase/auth';
 
 export default function SendComponent() {
   const [amount, setAmount] = useState('')
   const [recipient, setRecipient] = useState('')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [receivedAmount, setReceivedAmount] = useState('97')
+
+  async function handleRegister() {
+    const auth = getAuth(app);
+    const user = auth.currentUser;
+    const email = user ? user.email : null;
+
+    if (!email) {
+      console.error('No user is logged in');
+      return;
+    }
+
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // Use the returned 'publicKey' and 'credential' from the API to 
+      // initiate passkey creation with `navigator.credentials.create()`
+      const publicKey = data.publicKey; 
+      const credential = data.credential;
+
+      console.log('publicKey', publicKey);
+      console.log('credential', credential);
+      
+      const newCredential = await navigator.credentials.create({
+        publicKey: {
+          // ... (configure publicKey options based on the 'publicKey' from the server)
+          challenge: publicKey.challenge,
+          pubKeyCredParams: publicKey.pubKeyCredParams,
+          rp: publicKey.rp,
+          user: publicKey.user,
+        }
+      });
+
+      // Send the newCredential back to your API to complete registration
+      console.log('newCredential', newCredential);
+      
+    } else {
+      console.error('Registration failed:', data.error);
+    }
+  }  
 
   return (
     <Card className="w-full max-w-md mx-auto">
@@ -19,6 +66,7 @@ export default function SendComponent() {
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
+          <Button onClick={handleRegister}>Register</Button>
           <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
             Amount to be sent(Digital Dollars)
           </label>
