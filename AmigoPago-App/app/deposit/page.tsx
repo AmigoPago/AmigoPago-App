@@ -1,8 +1,8 @@
 "use client";
 
-import LandingPage from "../components/Landing";
-import HeaderComponent from "../components/Header";
-import FooterSection from "../components/Footer";
+import HeaderComponent from "../../components/Header";
+import FooterSection from "../../components/Footer";
+import DepositComponent from "../../components/Deposit";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <div className="space-y-20">
         <div className="flex flex-col items-center w-full space-y-4">
           <HeaderComponent />
-          <LandingPage />
+          <DepositComponent />
           <FooterSection />
         </div>
       </div>
