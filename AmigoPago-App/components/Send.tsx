@@ -1,15 +1,76 @@
+'use client';
+
 import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import incrementor from "../contracts/soroban_increment_contract";
+
+import {
+  StellarWalletsKit,
+  WalletNetwork,
+  allowAllModules,
+  FreighterModule,
+  FREIGHTER_ID,
+  ISupportedWallet
+} from '@creit.tech/stellar-wallets-kit';
+import { isAllowed, setAllowed, getUserInfo, getPublicKey, signTransaction } from '@stellar/freighter-api';
+
+const kit: StellarWalletsKit = new StellarWalletsKit({
+  network: WalletNetwork.TESTNET,
+  selectedWalletId: FREIGHTER_ID,
+  modules: [
+    new FreighterModule(),
+  ]
+});
 
 export default function SendComponent() {
   const [amount, setAmount] = useState('')
   const [recipient, setRecipient] = useState('')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [receivedAmount, setReceivedAmount] = useState('97')
+  const [receivedAmount] = useState('97')
+  const [walletAddress, setWalletAddress] = useState<string | null>(null)
+
+  const handleOpenModal = async () => {
+    await kit.openModal({
+      onWalletSelected: async (option: ISupportedWallet) => {
+        kit.setWallet(option.id);
+        const { address } = await kit.getAddress();
+        setWalletAddress(address); // Set the wallet address
+        console.log('address', address);
+      }
+    }); 
+  }
+
+  const handleTransfer = async () => {
+    console.log('transfer', amount, recipient, walletAddress);
+    const { address } = await kit.getAddress();
+
+    console.log('address', address);
+    console.log('networkPassphrase', WalletNetwork.PUBLIC);
+
+    // Sign a message instead of a transaction
+    const message = 'Approve to allow AmigoPago to process the transfer.';
+    const { signedMessage } = await kit.signMessage(message, {
+      address,
+      networkPassphrase: WalletNetwork.PUBLIC
+    });
+
+    console.log('signedMessage');
+    console.log(signedMessage.toString());
+
+    if (await isAllowed()) {
+      // Use the address obtained from kit.getAddress() as the public key
+      const publicKey = address;
+      if (publicKey) incrementor.options.publicKey = publicKey;
+    }
+    console.log('Saving Collateral');
+    console.log(incrementor.options.publicKey);
+    // const tx = await incrementor.increment();
+    //const { result } = await tx.signAndSend({signTransaction});
+    //console.log('result', result);
+  }
 
   return (
     <Card className="w-full max-w-md mx-auto">
@@ -19,6 +80,17 @@ export default function SendComponent() {
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
+          <div className="flex justify-center mb-4">
+            {walletAddress ? (
+              <p className="text-gray-700">
+                Connected Wallet: {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-5)}` : ''}
+              </p>
+            ) : (
+              <Button onClick={handleOpenModal} className="bg-orange-500 hover:bg-orange-600 text-white">
+                Connect Wallet
+              </Button>
+            )}
+          </div>
           <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
             Amount to be sent(Digital Dollars)
           </label>
@@ -79,7 +151,7 @@ export default function SendComponent() {
           <p className="text-sm text-gray-600">Transaction duration: Seconds</p>
         </div>
 
-        <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
+        <Button onClick={handleTransfer} className="w-full bg-orange-500 hover:bg-orange-600 text-white">
           Transfer
         </Button>
       </CardContent>
