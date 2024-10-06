@@ -1,8 +1,8 @@
 "use client";
 
-import LandingPage from "../components/Landing";
-import HeaderComponent from "../components/Header";
-import FooterSection from "../components/Footer";
+import LandingPage from "@/components/Landing";
+import HeaderComponent from "@/components/Header";
+import FooterSection from "@/components/Footer";
 
 export default function Home() {
   return (
