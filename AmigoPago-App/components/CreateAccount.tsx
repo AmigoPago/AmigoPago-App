@@ -1,26 +1,68 @@
-import { useState } from 'react'
+"use client";
+
+import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import app from '../config/firebaseConfig'; 
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from 'next/navigation'
+import Link from 'next/link';
+import { Alert } from "@/components/ui/alert"; // Import the Shadcn alert component
 
-export default function CreateAccountComponent() {
+const CreateAccountComponent = () => {
+
+  const [isMounted, setIsMounted] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     location: ''
-  })
+  });
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const auth = getAuth(app); // Pass the initialized app
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-    // Here you would typically send the data to your backend
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      // Create user in Firebase
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      
+      // Log the user in
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+
+      console.log('User created and logged in');
+
+      // Redirect to a different page or change the menu
+      router.push('/'); // Change '/dashboard' to your desired route
+    } catch (error: any) {
+      if (error.code === 'auth/email-already-in-use') {
+        console.error('Email already in use');
+        setAlertMessage('This email is already in use. Please try logging in or use a different email.');
+      } else {
+        console.error('Error creating user:', error);
+        setAlertMessage('An error occurred while creating the account. Please try again.');
+      }
+    }
   }
+
+  useEffect(() => {
+    if (isMounted) {
+      // Perform any actions that require the router here
+    }
+  }, [isMounted]);
 
   return (
     <Card className="w-full max-w-md mx-auto border border-gray-500 rounded-xl">
@@ -29,6 +71,11 @@ export default function CreateAccountComponent() {
         <p className="text-gray-500">Enter your details to sign up for our Digital Wallet</p>
       </CardHeader>
       <CardContent>
+        {alertMessage && (
+          <Alert className="mb-4 text-red-500" variant="error" >
+            {alertMessage}
+          </Alert>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -103,9 +150,15 @@ export default function CreateAccountComponent() {
           Google
         </Button>
         <div className="mt-4 text-center text-sm">
-          Already have an account? <a href="#" className="text-orange-500 hover:underline">Log in</a>
+          Already have an account? 
+          <Link href="/login" className="text-orange-500 hover:underline">
+            Log in
+          </Link>
         </div>
       </CardContent>
     </Card>
   )
 }
+
+
+export default CreateAccountComponent;

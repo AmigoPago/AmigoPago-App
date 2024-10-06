@@ -4,7 +4,7 @@ import HeaderComponent from "../../components/Header";
 import FooterSection from "../../components/Footer";
 import LoginComponent from "../../components/Login";
 
-export default function Home() {
+export default function Login() {
   return (
     <div className="px-10 py-10 h-screen">
       <div className="space-y-20">
