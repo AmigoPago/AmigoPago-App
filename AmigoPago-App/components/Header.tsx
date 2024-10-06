@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SVGProps } from 'react';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import app from '../config/firebaseConfig';

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 export default function SendComponent() {
   const [amount, setAmount] = useState('')
   const [recipient, setRecipient] = useState('')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [receivedAmount, setReceivedAmount] = useState('97')
 
   return (

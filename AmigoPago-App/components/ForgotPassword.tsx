@@ -22,6 +22,7 @@ export default function ForgotPasswordComponent() {
       
       // For demonstration, we'll assume the request was successful
       setSubmitStatus('success')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setSubmitStatus('error')
     } finally {

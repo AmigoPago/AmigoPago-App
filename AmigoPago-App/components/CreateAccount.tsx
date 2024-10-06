@@ -47,6 +47,7 @@ const CreateAccountComponent = () => {
 
       // Redirect to a different page or change the menu
       router.push('/'); // Change '/dashboard' to your desired route
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
         console.error('Email already in use');
@@ -72,7 +73,7 @@ const CreateAccountComponent = () => {
       </CardHeader>
       <CardContent>
         {alertMessage && (
-          <Alert className="mb-4 text-red-500" variant="error" >
+          <Alert className="mb-4 text-red-500" >
             {alertMessage}
           </Alert>
         )}
