@@ -11,12 +11,13 @@ import incrementor from "../contracts/soroban_increment_contract";
 import {
   StellarWalletsKit,
   WalletNetwork,
-  allowAllModules,
+  // allowAllModules,
   FreighterModule,
   FREIGHTER_ID,
   ISupportedWallet
 } from '@creit.tech/stellar-wallets-kit';
-import { isAllowed, setAllowed, getUserInfo, getPublicKey, signTransaction } from '@stellar/freighter-api';
+//import { isAllowed, setAllowed, getUserInfo, getPublicKey, signTransaction } from '@stellar/freighter-api';
+import { isAllowed } from '@stellar/freighter-api';
 
 const kit: StellarWalletsKit = new StellarWalletsKit({
   network: WalletNetwork.TESTNET,
