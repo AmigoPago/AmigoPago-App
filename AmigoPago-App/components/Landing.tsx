@@ -25,8 +25,8 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-blue-600 text-white py-8 px-4 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">The wallet for the Latino Immigrants</h1>
-        <p className="text-xl mb-4">Fast, secure, and easy-to-use wallet for local and international payments!!!</p>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2">The wallet of the Latino Immigrants</h1>
+        <p className="text-xl mb-4 text-[#fbdc6a]">Fast, secure, and easy-to-use wallet for local and international payments!!!</p>
         <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
           Get Started
         </button>
@@ -34,7 +34,7 @@ export default function LandingPage() {
 
       <main className="flex-grow">
         <section className="py-12 px-4">
-          <h2 className="text-2xl font-bold text-center mb-8">Why Choose AmigoPago?</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-[#ff6f00]">Why Choose AmigoPago?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <Globe className="w-16 h-16 mx-auto text-blue-600 mb-4" />
@@ -58,20 +58,20 @@ export default function LandingPage() {
           <h2 className="text-2xl font-bold text-center mb-8">Seamless Payments, Anywhere</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="text-center">
-              <MapPin className="w-16 h-16 mx-auto mb-4" />
-              <h3 className="font-bold mb-2">Local Payments</h3>
+              <MapPin className="w-16 h-16 mx-auto mb-4 text-[#fbdc6a]" />
+              <h3 className="font-bold mb-2 text-[#fbdc6a]">Local Payments</h3>
               <p className="text-sm">Pay at Latino-owned U.S. merchants with AMI points</p>
             </div>
             <div className="text-center">
-              <Globe className="w-16 h-16 mx-auto mb-4" />
-              <h3 className="font-bold mb-2">International Transfers</h3>
+              <Globe className="w-16 h-16 mx-auto mb-4 text-[#fbdc6a]" />
+              <h3 className="font-bold mb-2 text-[#fbdc6a]">International Transfers</h3>
               <p className="text-sm">Send money across borders with low fees and lightning-fast transaction times</p>
             </div>
           </div>
         </section>
 
         <section className="py-12 px-4">
-          <h2 className="text-2xl font-bold text-center mb-8">What Our Users Say</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-[#ff6f00]">What Our Users Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -97,7 +97,7 @@ export default function LandingPage() {
 
         <section className="bg-blue-600 text-white py-12 px-4">
           <h2 className="text-2xl font-bold text-center mb-4">Ready to Simplify Your Payments?</h2>
-          <p className="text-center mb-8">Join our waiting list and be the first to experience the future of money</p>
+          <p className="text-center mb-8 text-[#fbdc6a]">Join our waiting list and be the first to experience the future of money</p>
           <form onSubmit={handleSubmit} className="max-w-md mx-auto">
             <div className="mb-4">
               <input
