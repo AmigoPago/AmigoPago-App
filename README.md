@@ -1,2 +1,4 @@
 # AmigoPagoApp
-Amigo Pago App XML
+
+Amigo Pago App
+
