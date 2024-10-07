@@ -91,13 +91,13 @@ export default function HeaderComponent() {
 
       {isLoggedIn && (
         <nav className="hidden md:flex">
-          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4" href="/">
+          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4 font-bold" href="/">
             Home
           </Link>
-          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4" href="/send">
+          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4 font-bold" href="/send">
             Send
           </Link>
-          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4" href="/deposit">
+          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4 font-bold" href="/deposit">
             Deposit
           </Link>
         </nav>
