@@ -86,7 +86,7 @@ export default function HeaderComponent() {
       )}
 
       <Link href="/" className="hidden md:block lg:ml-4">
-        <h1 className="text-white text-2xl md:text-4xl font-bold">AmigoPago</h1>
+        <h1 className="text-white text-2xl md:text-4xl font-bold">Amigo<span className="text-[#fbdc6a]">Pago</span></h1>
       </Link>
 
       {isLoggedIn && (

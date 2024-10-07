@@ -25,7 +25,7 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-blue-600 text-white py-8 px-4 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">The solution of the Latino Immigrants</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2">The wallet for the Latino Immigrants</h1>
         <p className="text-xl mb-4">Fast, secure, and easy-to-use wallet for local and international payments!!!</p>
         <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
           Get Started
