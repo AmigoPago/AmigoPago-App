@@ -73,14 +73,14 @@ export default function HeaderComponent() {
             </SheetContent>
           </Sheet>
           <Link href="/" className="ml-2"> {/* Add margin-left for spacing */}
-            <h1 className="text-white text-md font-bold">AmigoPago</h1>
+            <h1 className="text-white text-md font-bold">Amigo<span className="text-[#fbdc6a]">Pago</span></h1>
           </Link>
         </div>
       )}
 
       {!isLoggedIn && (
           <Link href="/" className="ml-4 md:hidden"> {/* Add margin-left for spacing */}
-          <h1 className="text-white text-md font-bold">AmigoPago</h1>
+          <h1 className="text-white text-md font-bold">Amigo<span className="text-[#fbdc6a]">Pago</span></h1>
         </Link>
 
       )}
@@ -91,13 +91,13 @@ export default function HeaderComponent() {
 
       {isLoggedIn && (
         <nav className="hidden md:flex">
-          <Link className="text-gray-800 hover:text-black text-xl mx-4" href="/">
+          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4" href="/">
             Home
           </Link>
-          <Link className="text-gray-800 hover:text-black text-xl mx-4" href="/send">
+          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4" href="/send">
             Send
           </Link>
-          <Link className="text-gray-800 hover:text-black text-xl mx-4" href="/deposit">
+          <Link className="text-[#fbdc6a] hover:text-white text-xl mx-4" href="/deposit">
             Deposit
           </Link>
         </nav>
